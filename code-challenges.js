@@ -2,19 +2,32 @@
 
 
 // --------------------1) Create a function that returns the first 10 numbers of the Fibonacci sequence in an array. Expected output: [1, 1, 2, 3, 5, 8, 13, 21, 34, 55]
-
+var fibonacciFirstTen = () => {
+	let arr = [1,1]
+	for(let i = 2; i < 10; i++){
+		let nextValue = arr[i-2] + arr[i-1]
+		arr.push(nextValue);
+	}
+	return arr;	
+}
+console.log(fibonacciFirstTen());
 
 
 
 // --------------------2) Create a function that takes in an array and returns a new array of only odd numbers sorted from least to greatest.
 
 var fullArr1 = [4, 9, 0, "7", 8, true, "hey", 7, 199, -9, false, "hola"]
-// Expected output: [-9, 9, 7, 199]
+// Expected output: [-9, 7, 9, 199]
 var fullArr2 = ["hello", 7, 23, -823, false, 78, null, "67", 6, "number"]
 // Expected output: [-823, 7, 23]
 
+const oddSorted = (arr) => {
+	let newArr = arr.filter(value => typeof value === "number" && value%2 !== 0).sort((a,b) => a-b)
+	return newArr;
+}
 
-
+console.log(oddSorted(fullArr1));
+console.log(oddSorted(fullArr2));
 
 // --------------------3) Create a function that takes in a string of a single word and returns the middle letter of the word. If the word is an even number of letters, return the two middle letters.
 
@@ -23,11 +36,33 @@ var middleLetters1 = "hello"
 var middleLetters2 = "rhinoceros"
 // Expected output: “oc”
 
+var middleLetter = (string) => {
+	let middleIndex = Math.floor(string.length/2);
+	if(string.length%2 == 1){
+		return string[middleIndex];
+	}
+	else{
+		return string[middleIndex-1] + string[middleIndex]
+	}
+}
+console.log(middleLetter(middleLetters1));
+console.log(middleLetter(middleLetters2));
 
 
 
 // --------------------4) Create a class to get the area of a sphere. Create three spheres with different radi as test cases. Area of a sphere =  4πr^2 (four pi r squared)
-
+class Sphere{
+	constructor(radi){
+		this.area = (4 * Math.PI) * (Math.pow(radi,2))
+		this.radi = radi;
+	}
+}
+let sphereOne = new Sphere(2);
+let sphereTwo = new Sphere(30);
+let sphereThree = new Sphere(40);
+console.log(sphereOne.area);
+console.log(sphereTwo.area);
+console.log(sphereThree.area);
 
 
 
@@ -39,3 +74,20 @@ var numbersToAdd2 = [0, 7, -8, 12]
 // Expected output: [0, 7, -1, 11]
 var numbersToAdd3 = []
 // Expected output: []
+
+const accumulatingSum = (arr) => {
+	if(arr.length === 0){
+		return []
+	}
+	let newArr = []
+	let runningSum = 0;
+	for(let i = 0; i < arr.length; i++){
+		runningSum += arr[i];
+		newArr.push(runningSum)
+	}
+	return newArr;
+}
+
+console.log(accumulatingSum(numbersToAdd1));
+console.log(accumulatingSum(numbersToAdd2));
+console.log(accumulatingSum(numbersToAdd3));
